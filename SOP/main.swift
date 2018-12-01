@@ -41,3 +41,21 @@ print(sample.xml.render())
 extension UsersRoute: Pretty { }
 let r = Route.user(.index)
 print(r.doc.render())
+
+
+extension UsersRoute: FromJSONDict {
+    init(json: Any) throws {
+        try self.init(UsersRoute.structure.parse(json))
+    }
+}
+//let u = try User(json: [
+//    "name": "Chris",
+//    "age": 33,
+//    "admin": true
+//])
+
+let u2 = try Route(json: ["user": ["view": 5]])
+print(u2)
+
+let a = try Address(json: ["street": "hi", "city": "test"])
+print(a)
