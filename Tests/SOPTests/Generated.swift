@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SOP
 
 enum UsersRoute {
     case index
@@ -14,9 +15,9 @@ enum UsersRoute {
 }
 
 extension UsersRoute: Generic {
-    typealias Structure = TypeName<Case<Unit,Case<Product<K<Int>,Unit>,Sentinel>>>
+    typealias Structure = TypeName<Case<One,Case<Product<K<Int>,One>,Zero>>>
     
-    static let structure: Structure = TypeName("UsersRoute", Case("index", Unit(),Case("view", Product(K<Int>(),Unit()),Sentinel())))
+    static let structure: Structure = TypeName("UsersRoute", Case("index", One(),Case("view", Product(K<Int>(),One()),Zero())))
     
     var to: Structure.Value {
         switch self {
@@ -26,7 +27,7 @@ extension UsersRoute: Generic {
     }
     init(_ from: Structure.Value) {
         switch from {
-        case let .l: self = .index
+        case .l: self = .index
         case let .r(.l(x)): self = .view(x.0)
         }
     }
@@ -37,9 +38,9 @@ enum Route {
 }
 
 extension Route: Generic {
-    typealias Structure = TypeName<Case<Unit,Case<Product<K<UsersRoute>,Unit>,Sentinel>>>
+    typealias Structure = TypeName<Case<One,Case<Product<K<UsersRoute>,One>,Zero>>>
     
-    static let structure: Structure = TypeName("Route", Case("index", Unit(),Case("user", Product(K<UsersRoute>(),Unit()),Sentinel())))
+    static let structure: Structure = TypeName("Route", Case("index", One(), Case("user", Product(K<UsersRoute>(),One()), Zero())))
     
     var to: Structure.Value {
         switch self {
@@ -49,7 +50,7 @@ extension Route: Generic {
     }
     init(_ from: Structure.Value) {
         switch from {
-        case let .l: self = .index
+        case .l: self = .index
         case let .r(.l(x)): self = .user(x.0)
         }
     }

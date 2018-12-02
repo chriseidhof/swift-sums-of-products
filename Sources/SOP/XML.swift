@@ -46,13 +46,13 @@ extension Case: ResultToXMLNodes where A: ResultToXMLNodes, OtherCases: ResultTo
     }
 }
 
-extension Sentinel: ResultToXMLNodes {
+extension Zero: ResultToXMLNodes {
     func nodes(_ value: Never) -> [Node] {
         switch value { }
     }
 }
 
-extension Unit: ResultToXMLNodes {
+extension One: ResultToXMLNodes {
     func nodes(_ value: ()) -> [Node] {
         return []
     }

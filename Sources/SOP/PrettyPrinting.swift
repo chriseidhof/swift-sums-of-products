@@ -50,7 +50,7 @@ extension K: PrettyHelper where A: Pretty {
     }
 }
 
-extension Unit: PrettyHelper {
+extension One: PrettyHelper {
     func pretty(_ value: ()) -> Doc {
         return .empty
     }
@@ -60,7 +60,7 @@ extension String: Pretty { var doc: Doc { return .text(self) } }
 extension Int: Pretty { var doc: Doc { return .text("\(self)") } }
 extension Bool: Pretty { var doc: Doc { return .text("\(self)") } }
 
-extension Sentinel: PrettyHelper {
+extension Zero: PrettyHelper {
     func pretty(_ value: Never) -> Doc {
         switch value {
             
@@ -76,65 +76,3 @@ extension Case: PrettyHelper where A: PrettyHelper, OtherCases: PrettyHelper {
         }
     }
 }
-
-
-
-
-
-//protocol Pretty {
-//    var doc: Doc { get }
-//}
-//
-//protocol PrettyHelper: Describes {
-//    func generate(_ value: Value) -> Doc
-//}
-//
-//extension Product: PrettyHelper where A: PrettyHelper, B: PrettyHelper {
-//    func generate(_ value: (A.Value, B.Value)) -> Doc {
-//        return .lines([a.generate(value.0), b.generate(value.1)])
-//    }
-//}
-//
-//extension TypeName: PrettyHelper where A: PrettyHelper {
-//    func generate(_ value: A.Value) -> Doc {
-//        return .lines([
-//            .text("\(name) {"),
-//            .indent(a.generate(value)),
-//            .text("}")
-//        ])
-//    }
-//}
-//
-//extension Label: PrettyHelper where A: PrettyHelper {
-//    func generate(_ value: A.Value) -> Doc {
-//        return .lines([.text("▸ \(label)"), .indent(a.generate(value))])
-//    }
-//}
-//
-//extension K: PrettyHelper where A: Pretty {
-//    func generate(_ value: A) -> Doc {
-//        return value.doc
-//    }
-//}
-//
-//extension Unit: PrettyHelper {
-//    func generate(_ value: ()) -> Doc {
-//        return .empty
-//    }
-//}
-//
-//extension String: Pretty {
-//    var doc: Doc { return .text(self) }
-//}
-//
-//extension Int: Pretty {
-//    var doc: Doc { return .text("\(self)") }
-//}
-//
-//
-//
-//extension Bool: Pretty {
-//    var doc: Doc { return .text("\(self)") }
-//}
-//
-////let testUser = User(name: "Test", age: 50, admin: false)

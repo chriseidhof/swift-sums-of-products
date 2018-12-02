@@ -93,7 +93,7 @@ extension K: FromJSONHelper where A: FromJSON {
     }
 }
 
-extension Unit: FromJSONHelper {
+extension One: FromJSONHelper {
     func parse(_ value: Any) throws -> () {
         return ()
     }
@@ -122,7 +122,7 @@ extension Case: FromJSONHelper where A: FromJSONHelper, OtherCases: FromJSONHelp
     }
 }
 
-extension Sentinel: FromJSONHelper {
+extension Zero: FromJSONHelper {
     func parse(_ value: Any) throws -> Never {
         throw JSONError(.keyNotFound("sentinel", context: value))
     }

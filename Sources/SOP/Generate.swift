@@ -8,32 +8,6 @@
 
 import Foundation
 
-enum PersonOrCompany {
-    case person(Person)
-    case company(name: String, city: String)
-}
-
-extension PersonOrCompany: Generic {
-    typealias Structure = TypeName<Case<Product<K<Person>,Unit>,Case<Product<Label<K<String>>,Product<Label<K<String>>,Unit>>,Sentinel>>>
-    
-    static let structure: Structure = TypeName("PersonOrCompany", Case("person", Product(K<Person>(),Unit()),Case("company", Product(Label("name", K<String>()),Product(Label("city", K<String>()),Unit())),Sentinel())))
-    
-    var to: Structure.Value {
-        switch self {
-        case let .person(x_0): return .l((x_0, ()))
-        case let .company(x_0, x_1): return .r(.l((x_0, (x_1, ()))))
-        }
-    }
-    
-    init(_ from: Structure.Value) {
-        switch from {
-        case let .l(x): self = .person(x.0)
-        case let .r(.l(x)): self = .company(name: x.0, city: x.1.0)
-        }
-    }
-}
-
-
 struct Field {
     let name: String
     let type: String
@@ -76,7 +50,7 @@ extension EnumField {
     var asField: String {
         switch self {
         case let .anonymous(type: t): return "K<\(t)>"
-        case let .named(name: n, type: t): return "Label<K<\(t)>>"
+        case let .named(name: _, type: t): return "Label<K<\(t)>>"
         }
     }
     
