@@ -43,7 +43,7 @@ let r = Route.user(.index)
 print(r.doc.render())
 
 
-extension UsersRoute: FromJSONDict {
+extension UsersRoute: FromJSON {
     init(json: Any) throws {
         try self.init(UsersRoute.structure.parse(json))
     }
